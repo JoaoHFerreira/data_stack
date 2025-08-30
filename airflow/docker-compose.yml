@@ -13,7 +13,7 @@ x-airflow-common:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-kaggle>=1.7.4.5}
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-kaggle>=1.7.4.5 apache-airflow-providers-cncf-kubernetes>=7.0.0}
     # Set AIRFLOW_UID to 50000 by default if not set
     AIRFLOW_UID: ${AIRFLOW_UID:-50000}
   volumes:
@@ -23,6 +23,7 @@ x-airflow-common:
     - ./plugins:/opt/airflow/plugins
     - ../data:/opt/airflow/data
     - ../src:/opt/airflow/src
+    - ~/.kube/config:/home/airflow/.kube/config:ro
   # Use 50000 as default UID if not set
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
