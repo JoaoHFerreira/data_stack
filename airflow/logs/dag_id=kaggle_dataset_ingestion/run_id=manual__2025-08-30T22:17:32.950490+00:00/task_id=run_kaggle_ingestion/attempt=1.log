@@ -1,0 +1,32 @@
+[2025-08-30T22:17:34.185+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: kaggle_dataset_ingestion.run_kaggle_ingestion manual__2025-08-30T22:17:32.950490+00:00 [queued]>
+[2025-08-30T22:17:34.192+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: kaggle_dataset_ingestion.run_kaggle_ingestion manual__2025-08-30T22:17:32.950490+00:00 [queued]>
+[2025-08-30T22:17:34.192+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 3
+[2025-08-30T22:17:34.202+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_kaggle_ingestion> on 2025-08-30 22:17:32.950490+00:00
+[2025-08-30T22:17:34.207+0000] {standard_task_runner.py:57} INFO - Started process 180 to run task
+[2025-08-30T22:17:34.209+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'kaggle_dataset_ingestion', 'run_kaggle_ingestion', 'manual__2025-08-30T22:17:32.950490+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/kaggle_ingestion_dag.py', '--cfg-path', '/tmp/tmpu_jj9fbq']
+[2025-08-30T22:17:34.210+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask run_kaggle_ingestion
+[2025-08-30T22:17:34.240+0000] {task_command.py:416} INFO - Running <TaskInstance: kaggle_dataset_ingestion.run_kaggle_ingestion manual__2025-08-30T22:17:32.950490+00:00 [running]> on host c9caace5c1c2
+[2025-08-30T22:17:34.291+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-team' AIRFLOW_CTX_DAG_ID='kaggle_dataset_ingestion' AIRFLOW_CTX_TASK_ID='run_kaggle_ingestion' AIRFLOW_CTX_EXECUTION_DATE='2025-08-30T22:17:32.950490+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-30T22:17:32.950490+00:00'
+[2025-08-30T22:17:34.292+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-30T22:17:34.292+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'PYTHONPATH=/opt/***/src python3 /opt/***/src/ingestion/kaggle.py titanic']
+[2025-08-30T22:17:34.300+0000] {subprocess.py:86} INFO - Output:
+[2025-08-30T22:17:34.452+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-30T22:17:34.453+0000] {subprocess.py:93} INFO -   File "/opt/***/src/ingestion/kaggle.py", line 67, in <module>
+[2025-08-30T22:17:34.453+0000] {subprocess.py:93} INFO -     if not downloader.run(dataset_name):
+[2025-08-30T22:17:34.453+0000] {subprocess.py:93} INFO -   File "/opt/***/src/ingestion/kaggle.py", line 19, in run
+[2025-08-30T22:17:34.453+0000] {subprocess.py:93} INFO -     self._create_directories(dataset_name)
+[2025-08-30T22:17:34.453+0000] {subprocess.py:93} INFO -   File "/opt/***/src/ingestion/kaggle.py", line 29, in _create_directories
+[2025-08-30T22:17:34.453+0000] {subprocess.py:93} INFO -     self._get_dataset_folder(dataset_name).mkdir(exist_ok=True)
+[2025-08-30T22:17:34.453+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/pathlib.py", line 1288, in mkdir
+[2025-08-30T22:17:34.454+0000] {subprocess.py:93} INFO -     self._accessor.mkdir(self, mode)
+[2025-08-30T22:17:34.454+0000] {subprocess.py:93} INFO - PermissionError: [Errno 13] Permission denied: 'data/raw/datasets/titanic'
+[2025-08-30T22:17:34.457+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-08-30T22:17:34.464+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-08-30T22:17:34.466+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=kaggle_dataset_ingestion, task_id=run_kaggle_ingestion, execution_date=20250830T221732, start_date=20250830T221734, end_date=20250830T221734
+[2025-08-30T22:17:34.478+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 5 for task run_kaggle_ingestion (Bash command failed. The command returned a non-zero exit code 1.; 180)
+[2025-08-30T22:17:34.501+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-08-30T22:17:34.512+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
